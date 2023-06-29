@@ -4,16 +4,18 @@ let songIndex = 0;
 let audioElement = new Audio('songs/count_On_Me.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let progressBar = document.getElementById('myProgressBar');
+let mainSongName = document.getElementById('mainSongName');
 let gif = document.getElementById('gif');
 let songItem = Array.from(document.getElementsByClassName('songItem'));
 let smallSongPlay = document.getElementsByClassName('songItemPlay');
+
 // let Song_ka_name = document.getElementsByClassName('songName');
 
 let songs = [
     {songName: "Count On Me", filePath: "songs/count_On_Me.mp3", coverImage: "img/count_on_me.jpeg"},
-    {songName: "Happy.mp3", filePath: "songs/Happy.mp3", coverImage: "img/happy.jpg"},
-    {songName: "Dark_Horse.mp3", filePath: "songs/Dark_Horse.mp3", coverImage: "img/dark_horse.jpg"},
-    {songName: "Youre_Beautiful.mp3", filePath: "songs/Youre_Beautiful.mp3", coverImage: "img/youre_beautiful.jpg"},
+    {songName: "Happy", filePath: "songs/Happy.mp3", coverImage: "img/happy.jpg"},
+    {songName: "Dark Horse", filePath: "songs/Dark_Horse.mp3", coverImage: "img/dark_horse.jpg"},
+    {songName: "Youre Beautiful", filePath: "songs/Youre_Beautiful.mp3", coverImage: "img/youre_beautiful.jpg"},
 ]
 
 songItem.forEach((element, i) => {
@@ -31,7 +33,7 @@ masterPlay.addEventListener('click', ()=>{
         audioElement.play();
         masterPlay.classList.remove('fa-circle-play');
         masterPlay.classList.add('fa-circle-pause');
-        gif.style.opacity = '1'
+        gif.style.opacity = '1';
     }
     else{
         audioElement.pause();
@@ -94,6 +96,8 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>
   
       if (element.classList.contains('fa-circle-play')) {
         audioElement.play();
+        gif.style.opacity = '1';
+        mainSongName.innerText = songs[songIndex].songName
         makeAllPlay(); 
         console.log('If statement is true');
         element.classList.remove('fa-circle-play');
@@ -104,6 +108,7 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>
     else
      {
         audioElement.pause();
+        gif.style.opacity = '0'
         console.log('else statement is true');
         element.classList.remove('fa-circle-pause');
         element.classList.add('fa-circle-play');
@@ -121,8 +126,10 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>
         songIndex++;
     }
     audioElement.src = songs[songIndex].filePath;
+    mainSongName.innerText = songs[songIndex].songName
     audioElement.currentTime = 0;
     audioElement.play();
+    gif.style.opacity = '1';
     masterPlay.classList.remove('fa-circle-play');
     masterPlay.classList.add('fa-circle-pause');
 })
@@ -134,8 +141,10 @@ document.getElementsByClassName('previous')[0].addEventListener('click', ()=>{
         songIndex--;
     }
     audioElement.src = songs[songIndex].filePath;
+    mainSongName.innerText = songs[songIndex].songName
     audioElement.currentTime = 0;
     audioElement.play();
+    gif.style.opacity = '1';
     masterPlay.classList.remove('fa-circle-play');
     masterPlay.classList.add('fa-circle-pause');
 })
