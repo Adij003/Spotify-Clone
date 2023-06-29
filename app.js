@@ -86,4 +86,6 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
     })
 })
 
+
+
 // what it does is for each element in class songItemPlay it adds am event listener to element which is activated on click and then it prints which element was clicked

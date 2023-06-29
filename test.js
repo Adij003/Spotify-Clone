@@ -86,10 +86,11 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>
       
       
   
-      let index = parseInt(e.target.id); // Get the index from the clicked element's ID
-      let selectedSong = songs[index]; // Get the corresponding song from the 'songs' array
-  
+      songIndex = parseInt(e.target.id); // Get the index from the clicked element's ID
+      let selectedSong = songs[songIndex]; // Get the corresponding song from the 'songs' array
+          
       audioElement.src = selectedSong.filePath; // Set the 'src' based on the song's file path
+      audioElement.currentTime = 0;
   
       if (element.classList.contains('fa-circle-play')) {
         audioElement.play();
@@ -111,6 +112,33 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>
       }
     });
   });
+
+  document.getElementsByClassName('next')[0].addEventListener('click', ()=>{
+    if(songIndex > 3){
+        songIndex = 0;
+    }
+    else{
+        songIndex++;
+    }
+    audioElement.src = songs[songIndex].filePath;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlay.classList.remove('fa-circle-play');
+    masterPlay.classList.add('fa-circle-pause');
+})
+document.getElementsByClassName('previous')[0].addEventListener('click', ()=>{
+    if(songIndex < 0){
+        songIndex = 3;
+    }
+    else{
+        songIndex--;
+    }
+    audioElement.src = songs[songIndex].filePath;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlay.classList.remove('fa-circle-play');
+    masterPlay.classList.add('fa-circle-pause');
+})
   
 
 // what it does is for each element in class songItemPlay it adds am event listener to element which is activated on click and then it prints which element was clicked
