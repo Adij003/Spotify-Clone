@@ -44,13 +44,7 @@ masterPlay.addEventListener('click', ()=>{
     
 })
 
-// updating seekbar
-audioElement.addEventListener('timeupdate', ()=>{
-    // console.log('timeupdate');
-    progress = parseFloat((audioElement.currentTime/audioElement.duration)*100);
-    // console.log(progress);
-    progressBar.value = progress;
-})
+
 
 progressBar.addEventListener('change', ()=>{
     audioElement.currentTime = progressBar.value*audioElement.duration/100;
@@ -89,16 +83,17 @@ function makeAllPlay(){
 
 Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
     element.addEventListener('click', (e) => {
-      console.log(e.target);
-    //   makeAllPlay();
+      
+      
   
       let index = parseInt(e.target.id); // Get the index from the clicked element's ID
       let selectedSong = songs[index]; // Get the corresponding song from the 'songs' array
   
       audioElement.src = selectedSong.filePath; // Set the 'src' based on the song's file path
   
-      if (audioElement.paused) {
+      if (element.classList.contains('fa-circle-play')) {
         audioElement.play();
+        makeAllPlay(); 
         console.log('If statement is true');
         element.classList.remove('fa-circle-play');
         element.classList.add('fa-circle-pause');
@@ -119,3 +114,11 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>
   
 
 // what it does is for each element in class songItemPlay it adds am event listener to element which is activated on click and then it prints which element was clicked
+
+// updating seekbar
+audioElement.addEventListener('timeupdate', ()=>{
+    // console.log('timeupdate');
+    progress = parseFloat((audioElement.currentTime/audioElement.duration)*100);
+    // console.log(progress);
+    progressBar.value = progress;
+})
